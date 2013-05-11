@@ -22,6 +22,20 @@ target_link_libraries(curly
 	${CURL_LIBRARIES}
 )
 
+add_library(curly-asio
+        service.cc
+	service.hxx
+        service.hh
+        asio_request.cc
+        asio_request.hh
+)
+
+target_link_libraries(curly-asio
+	${Boost_LIBRARIES}
+	${CURL_LIBRARIES}
+	curly
+)
+
 add_executable(test
 	test.cc
 )
@@ -31,19 +45,12 @@ target_link_libraries(test
 )
 
 
-add_executable(curl-asio
-        curl-asio.cc
-        service.cc
-	service.hxx
-        service.hh
-        asio_request.cc
-        asio_request.hh
+add_executable(test-asio
+        test-asio.cc
 )
 
-target_link_libraries(curl-asio
-	${Boost_LIBRARIES}
-	${CURL_LIBRARIES}
-	curly
+target_link_libraries(test-asio
+	curly-asio
 )
 
 
