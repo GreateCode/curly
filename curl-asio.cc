@@ -1,11 +1,8 @@
 #include <boost/asio.hpp>
+
 #include <curly.hh>
-
-#include "service.hh"
-#include "asio_request.hh"
-
-#define DEBUG std::cout << __PRETTY_FUNCTION__ <<": " << __LINE__ << std::endl;
-#define FDEBUG(X) std::cout << X << " " << __PRETTY_FUNCTION__ <<": " << __LINE__ << std::endl;
+#include <service.hh>
+#include <asio_request.hh>
 
 namespace asio = boost::asio;
 
