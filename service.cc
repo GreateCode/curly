@@ -78,14 +78,11 @@ namespace curly
     {
       if (!error)
       {
-        DEBUG;
         auto mc = curl_multi_socket_action(multi, CURL_SOCKET_TIMEOUT, 0,
                                            &_this->_concurrent);
         throw_if_mcode(mc);
         _this->check_multi_info();
       }
-      else
-        throw std::runtime_error{error.message()};
     };
     if (timeout_ms > 0)
     {
@@ -134,17 +131,12 @@ namespace curly
     // The generic callback for read/write
     // 'what' describe the action to perform.
     auto fn = [_this, what, sockfd]
-      (boost::system::error_code const& error, size_t)
+      (boost::system::error_code const&, size_t)
     {
-      if (!error)
-      {
-        auto mc = curl_multi_socket_action(_this->_multi.get(), sockfd,
-                                           what, &_this->_concurrent);
-        throw_if_mcode(mc);
-        _this->check_multi_info();
-      }
-      else
-        throw std::runtime_error{error.message()};
+      auto mc = curl_multi_socket_action(_this->_multi.get(), sockfd,
+                                         what, &_this->_concurrent);
+      throw_if_mcode(mc);
+      _this->check_multi_info();
     };
 
     // Check what we have to poll for. The asio null_buffers allow checking only
