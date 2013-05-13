@@ -60,7 +60,7 @@ namespace curly
 
   asio_request::asio_request(asio::io_service& io,
                              curly::request_configuration c):
-    _io{asio::use_service<curl_service>(io)},
+    _io(asio::use_service<curl_service>(io)),
     _config{c},
     _socket{io, boost::asio::ip::tcp::v4()}
   {
