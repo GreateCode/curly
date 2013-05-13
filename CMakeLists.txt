@@ -13,7 +13,7 @@ include_directories(${Boost_INCLUDE_DIR})
 include_directories(${CURL_INCLUDE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-add_library(curly
+add_library(curly SHARED
 	curly.cc
 	curly.hh
 )
@@ -22,7 +22,7 @@ target_link_libraries(curly
 	${CURL_LIBRARIES}
 )
 
-add_library(curly-asio
+add_library(curly-asio SHARED
         service.cc
 	service.hxx
         service.hh
